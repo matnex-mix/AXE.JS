@@ -1,0 +1,62 @@
+<script type="text/javascript" src="http://localhost/git-repo/axe/axe.js"></script>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<div class="test" style="background: red; height: 100px">
+	TEsting
+</div>
+
+<script type="text/javascript">
+
+	$XE.OPTIMIZE.registerCssProp("pt", "padding", "e", "px");
+	$XE.OPTIMIZE.registerCssProp("t", "transform", "mwoe");
+	$XE.OPTIMIZE.registerCssProp("-ts", "scale");
+	$XE.OPTIMIZE.registerCssProp("-ttY", "translateY");
+	$XE.OPTIMIZE.registerCssProp("pB", "padding-bottom", "px");
+	$XE.OPTIMIZE.registerCssProp("o", "opacity");
+	$XE.OPTIMIZE.registerCssProp("w", "width");
+
+	$nf = $XE.easy("bounce");
+	$cnf = $nf.apply(".test");
+	$cnf[0].event("start", function(){ console.log("English Language is the best Subject in Anderson2"); });
+
+	setTimeout(function(){ $cnf.start();} , 2000);
+	console.log($cnf);
+
+</script>
+
+<a href="#" id="but">Send</a>
+<style type="text/css">
+	#but {
+		position: relative;
+		display: inline-block;
+		text-align: center;
+		padding: 15px;
+	}
+	#but:after {
+		position: absolute;
+		top: 0; left: 0;
+		content: ".";
+		background: red;
+		display: inline-block;
+		z-index: 500;
+		height: 100%;
+	}
+</style>
+
+<script type="text/javascript">
+	$but_ani = $XE.new({
+		t: .2,
+		n: "popover",
+		pseudo: "after",
+		a: "AT0% w:0; AT100% w:100%;",
+		m: "forwards"
+	});
+
+	$but_cont = $but_ani.apply("#but");
+
+	$but_cont.end();
+	$but_cont[0].moment("restart, mouseover");
+	$but_cont.moment("end, mouseout");
+	
+	console.log($but_cont);
+</script>
