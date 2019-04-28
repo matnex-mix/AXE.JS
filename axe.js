@@ -58,6 +58,7 @@ AXE.prototype.compile_keyframes = function($frames) {
 			$frame_string.forEach(function($fs){
 
 				$cur = $fs.split(/\s*:\s*/);
+				$curs = "";
 				if($cur[0] == "t") {
 
 					$curs = $cur[1].split(/\s/);
@@ -337,45 +338,49 @@ AXE.prototype.apply = function($el_s) {
 
 function AXECONTROLS($el_s) {
 
-	if(typeof $el_s == "string") $el_s = document.querySelector($el_s);
+	try {
 
-	if($el_s.length) {
+		if(typeof $el_s == "string") $el_s = document.querySelector($el_s);
 
-		$el_s.forEach(function($el_, $i){
+		if($el_s.length) {
 
-			$obj = {DOM: $el_, index: $i}
+			$el_s.forEach(function($el_, $i){
+
+				$obj = {DOM: $el_, index: $i}
+				$obj.__proto__ = this.__proto__;
+
+				$this = this;
+
+				$el_.onanimationstart = function(){ $this.runEvents("start"); };
+				$el_.onanimationcancel = function(){ $this.runEvents("cancel"); };
+				$el_.onanimationiteration = function(){ $this.runEvents("cycle"); };
+				$el_.onanimationend = function(){ $this.runEvents("end"); };
+
+				this[$i] = $obj;
+
+			});
+			this.length = $el_s.length;
+
+		} else { 
+
+			$obj = {DOM: $el_s, index: 0};
 			$obj.__proto__ = this.__proto__;
 
 			$this = this;
 
-			$el_.onanimationstart = function(){ $this.runEvents("start"); };
-			$el_.onanimationcancel = function(){ $this.runEvents("cancel"); };
-			$el_.onanimationiteration = function(){ $this.runEvents("cycle"); };
-			$el_.onanimationend = function(){ $this.runEvents("end"); };
+			$el_s.onanimationstart = function(){ $this.runEvents("start"); };
+			$el_s.onanimationcancel = function(){ $this.runEvents("cancel"); };
+			$el_s.onanimationiteration = function(){ $this.runEvents("cycle"); };
+			$el_s.onanimationend = function(){ $this.runEvents("end"); };
+			
+			this[0] = $obj;
+			this.length = 1;
 
-			this[$i] = $obj;
+		}
 
-		});
-		this.length = $el_s.length;
+		this.index = -1;
 
-	} else { 
-
-		$obj = {DOM: $el_s, index: 0};
-		$obj.__proto__ = this.__proto__;
-
-		$this = this;
-
-		$el_s.onanimationstart = function(){ $this.runEvents("start"); };
-		$el_s.onanimationcancel = function(){ $this.runEvents("cancel"); };
-		$el_s.onanimationiteration = function(){ $this.runEvents("cycle"); };
-		$el_s.onanimationend = function(){ $this.runEvents("end"); };
-		
-		this[0] = $obj;
-		this.length = 1;
-
-	}
-
-	this.index = -1;
+	} catch (ex) { console.log("AXE: Catched Exception; "+ex); }
 
 };
 
@@ -590,16 +595,7 @@ AXECONTROLS.prototype.moment = function ($ct) {
 
 function AXEEASY($name, $opt) {
 
-	/* Define All AXE Easy Animations */
-	//$xeasy = JSON.parse(atob("eyJib3VuY2UiOnsiYSI6IkFUMCUgdDogdFktLTEwMCU7IG86IDA7IEFUNSUgdDogdFktLTEwMCUgbzogMDsgQVQxNSUgdDogdFktMDsgcEI6IDU7IEFUMzAlIHQ6IHRZLS01MCU7IEFUNDAlIHQ6IHRZLTA7IHBCOiA2OyBBVDUwJSB0OiB0WS0tMzAlOyBBVDcwJSB0OiB0WS0wOyBwQjogN3B4OyBBVDgwJSB0OiB0WS0tMTUlOyBBVDkwJSB0OiB0WS0wOyBwYjogNzsgQVQ5NSUgdDogdFktLTclOyBBVDk3JSB0OiB0WS0wOyBwQjogOTsgQVQ5OSUgdDogdFktLTMlOyBBVDEwMCUgdDogdFktMDsgcEI6IDk7ICIsIm4iOiJib3VuY2UiLCJ0IjozLCJmIjoiZWFzZS1vdXQifX0="));
-	$xeasy = {
-		"bounce": {
-			"a": "AT0% t: tY--100%; o: 0; AT5% t: tY--100% o: 0; AT15% t: tY-0; pB: 5; AT30% t: tY--50%; AT40% t: tY-0; pB: 6; AT50% t: tY--30%; AT70% t: tY-0; pB: 7px; AT80% t: tY--15%; AT90% t: tY-0; pb: 7; AT95% t: tY--7%; AT97% t: tY-0; pB: 9; AT99% t: tY--3%; AT100% t: tY-0; pB: 9;",
-			"n": "bounce",
-			"t": 3,
-			"f": "ease-out"
-		}
-	}
+	if(typeof $xeasy !== "object") { console.log("AXE: Cannot use Easy-Axe Module not loaded"); console.trace(); return; }
 
 	if($xeasy[$name]) {
 
