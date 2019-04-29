@@ -551,9 +551,14 @@ AXECONTROLS.prototype.runEvents = function($event_name) {
 
 /* Momentux */
 
+// Moment Storage
+//AXECONTROLS.prototype.moments = "";
+
 AXECONTROLS.prototype.moment = function ($ct) {
 
 	$ct = $ct.split(",");
+	$func = btoa($ct.join(',')).replace(/=/gi,"");
+	eval($func+' = function () { $this[$ct[0]](); }');
 
 	if(!$ct[2]) {
 
@@ -562,24 +567,93 @@ AXECONTROLS.prototype.moment = function ($ct) {
 			var $this = this;
 			this.forEach(function($obj){
 
-				$obj.DOM.addEventListener($ct[1].trim(), function(){
-					$this[$ct[0]]();
-				});
+				eval('$obj.DOM.addEventListener($ct[1].trim(), '+$func+')');
 
 			});
 
 		} else {
 
 			var $this = this;
-			this.DOM.addEventListener($ct[1].trim(), function(){
-				$this[$ct[0]]();
-			});
+			eval('this.DOM.addEventListener($ct[1].trim(), '+$func+')');
 
 		}
 
 	} else {
 
-		
+		$els = document.querySelectorAll($ct[2].trim());
+
+		if($els.length > 1) {
+
+			var $this = this;
+			$els.forEach(function($obj){
+
+				eval('$obj.addEventListener($ct[1].trim(), '+$func+')');
+
+			});
+
+		} else {
+
+			var $this = this;
+			eval('$els[0].addEventListener($ct[1].trim(), '+$func+')');
+
+		}
+
+	}
+
+	// Store the moment
+	//this.moments += ";"+$ct.join(",");
+
+}
+
+AXECONTROLS.prototype.r_moment = function($ct) {
+
+	if($ct.toUpperCase() === "CLEAR") $XE.moments = {};
+	else {
+
+		$id = btoa($ct).replace(/=/gi,"");
+		if($XE.moments[$id]) delete($XE.moments[$id]);
+
+		$ct = $ct.split(",");
+
+		if(!$ct[2]) {
+
+			if(this.index == -1) {
+
+				var $this = this;
+				this.forEach(function($obj){
+
+					eval('$obj.DOM.removeEventListener($ct[1].trim(), '+$id+')');
+
+				});
+
+			} else {
+
+				var $this = this;
+				eval('this.DOM.removeEventListener($ct[1].trim(), '+$id+')');
+
+			}
+
+		} else {
+
+			$els = document.querySelectorAll($ct[2].trim());
+
+			if($els.length > 1) {
+
+				var $this = this;
+				$els.forEach(function($obj){
+
+					eval('$obj.removeEventListener($ct[1].trim(), '+$id+')');
+
+				});
+
+			} else {
+
+				var $this = this;
+				eval('$els[0].removeEventListener($ct[1].trim(), '+$id+')');
+
+			}
+
+		}
 
 	}
 
@@ -675,3 +749,13 @@ if(document.readyState != "loading") {
 	$XE.Initialize();
 
 }
+
+// Register all necessary css properties
+
+$XE.OPTIMIZE.registerCssProp("pt", "padding", "e", "px");
+$XE.OPTIMIZE.registerCssProp("t", "transform", "mwoe");
+$XE.OPTIMIZE.registerCssProp("-ts", "scale");
+$XE.OPTIMIZE.registerCssProp("-ttY", "translateY");
+$XE.OPTIMIZE.registerCssProp("pB", "padding-bottom", "px");
+$XE.OPTIMIZE.registerCssProp("o", "opacity");
+$XE.OPTIMIZE.registerCssProp("w", "width");
