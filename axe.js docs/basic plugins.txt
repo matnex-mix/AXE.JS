@@ -1,0 +1,14 @@
+axe originally comes with 2 plugins ( axe-html and axe-easy ). While axe-html makes it possibly to write an animation with only HTML, axe-easy contains over 200 animations from which you can pick one and customize it for use thereby improving speed. You would have seen the use of axe-html through this tutorial so there isn't any need to discuss that anymore.
+
+axe-easy:
+	see [axe-reference] for list of supported animations
+
+	usage:
+		anim = $XE.easy( '%{NAME}', %{OPTIONS} )
+		anim.apply( '#main' ).start()
+
+	explanation:
+		%{NAME} (required) - name of axe-easy animation to use
+		%{OPTIONS} (optional) - options to change default behaviour of easy animations
+
+	you can also add your own animations to axe-easy to be able to re-use them later. see how [axe-easy-extension]

@@ -1,0 +1,26 @@
+AXE supports a number of events for monitoring your animations:
+
+- Start,
+- Pause,
+- Play,
+- Resume,
+- End
+
+each one of these can be used thus:
+
+<script>
+
+	anim = $XE.easy("bounce");
+	anim_cont = anim.apply(".axe-tests");
+
+	anim_cont.event("start", function(){
+		console.log("AXE Started");
+	});
+
+	// --- or ---
+
+	anim_cont[0].event("start", function(){
+		console.log("AXE 0 Started");
+	});
+
+</script>

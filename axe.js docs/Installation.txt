@@ -1,0 +1,23 @@
+------ Installation ------
+
+	Through NPM:
+
+		`npm install axe.js@latest`
+
+		or
+
+		`npm install axe.js@-VERSION-NUMBER-`
+
+	Through CND:
+
+		Add this inbetween the <head> tags
+
+		`<script src="http://axe.framework.js/use/axe-VERSION-NUMBER-/-TYPE-.js"></script>`
+
+
+	Check if installed, place before </body>
+
+		<div id="axe-test">Testing AXE</div>
+		<script>
+			AXE("#axe-test", {"t": "0.5", "n": "axe-test", "a": "AT0 `o:0 AT0.5 `o:1 "}, true);
+		</script>

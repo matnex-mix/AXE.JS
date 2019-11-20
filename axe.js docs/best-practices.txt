@@ -1,0 +1,54 @@
+Binding Events:
+	event binding should be done by defined functions e.g
+
+	not good:
+
+	// some code here
+	anim_controls = anim.apply( '.test' )
+	anim_controls.event( 'start', function(){
+		// some code here
+	});
+
+	best practice:
+
+	function do_start() {
+		// some code here
+	}
+
+	// some code here
+	anim_controls = anim.apply( '.test' )
+	anim_controls.event( 'start', do_start );
+
+AXE-HTML formatting:
+	format axe-html in this way for an easily readable code
+
+	<a href="#" class="but"
+		axe-t=".2"
+		axe-n="popover"
+		axe-pseudo="after"
+		axe-a="AT0% w:0; AT100% w:100%;"
+		axe-m="forwards"
+		axe-moment="restart, click; end, mouseout"
+	> Send </a>
+
+Extending axe-easy:
+
+	the $xeasy object should be extended declaratively
+
+	bad:
+		$xeasy = {
+			"mybounce": {
+				a: "AT0% t: tY--100%; o: 0; AT5% t: tY--100% o: 0; AT15% t: tY-0; pB: 5; AT30% t: tY--50%; AT40% t: tY-0; pB: 6; AT50% t: tY--30%; AT70% t: tY-0; pB: 7px; AT80% t: tY--15%; AT90% t: tY-0; pb: 7; AT95% t: tY--7%; AT97% t: tY-0; pB: 9; AT99% t: tY--3%; AT100% t: tY-0; pB: 9;",
+				n: "bounce",
+				t: 3,
+				f: "ease-out"
+			},
+		...
+
+	best practice:
+		$xeasy['mybounce'] = {
+			a: "AT0% t: tY--100%; o: 0; AT5% t: tY--100% o: 0; AT15% t: tY-0; pB: 5; AT30% t: tY--50%; AT40% t: tY-0; pB: 6; AT50% t: tY--30%; AT70% t: tY-0; pB: 7px; AT80% t: tY--15%; AT90% t: tY-0; pb: 7; AT95% t: tY--7%; AT97% t: tY-0; pB: 9; AT99% t: tY--3%; AT100% t: tY-0; pB: 9;",
+			n: "bounce",
+			t: 3,
+			f: "ease-out"
+		}

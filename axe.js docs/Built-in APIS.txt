@@ -1,0 +1,276 @@
+AXE apis for V1.0.0
+
+$XE
+
+$XE.$
+	type: function
+	params:
+		Object: options to create animation
+	return:
+		Object: an instance of AXE
+
+$XE.OPTIMIZE.cssPropExists:
+	type: function
+	params:
+		String: short-name for that property
+	return:
+		Bool: whether it exists or not
+
+$XE.OPTIMIZE.registerCssProp:
+	type: function
+	params:
+		String (short-name): short-name for the property also the key for storage
+		String (long-name): the real css property
+		String (browser-support): browsers to add support for which can be of four values [ 'o' for opera, 'm' for mozilla, 'e' for internet explorer, 'w' for chrome ]
+		String (default-extension): the default unit if the property value accepts numbers
+	return:
+		NULL
+
+$XE.Initialize:
+	type: own function
+	params:
+		NULL
+	return:
+		NULL
+
+	Initializes axe ( do not use this function )
+
+$XE.control:
+	type: function
+	params:
+		String or HTMLElement: the query to an HTML element or an HTMLElement object
+	return:
+		Object: an instance of AXECONTROLS
+
+$XE.easy:
+	type: function
+	params:
+		String (animation-name): the name of the animation to use see [link to easy-name-ref]
+		Object (animation-options)(optional) : options to change default behaviour of easy animations
+	return:
+		Object: an instance of AXEEASY
+
+$XE.cssProps:
+	type: Object
+	an associative array that holds axe-css properties 
+
+$XE.moments:
+	type: Object
+	an associative array that holds Momentux (axe-moments) functions
+
+AXE:
+	type: Object
+	params:
+		Object: animation options
+
+AXE.prototype.compile_keyframes:
+	type: own prototype function
+	params:
+		String: axe keyframe sequence
+	return:
+		NULL
+
+AXE.prototype.define_vars:
+	type: own prototype function
+	params:
+		String: definition code or sequence in axe keyframes
+	return:
+		NULL
+
+AXE.prototype.prepare:
+	type: own prototype function
+	params:
+		NULL
+	return
+		NULL
+	prepare axe-keyframes for parsing
+
+AXE.prototype.build:
+	type: own prototype function
+	params:
+		NULL
+	return:
+		NULL
+
+	compile axe keyframes into original css keyframes and create animation style
+
+AXE.prototype.reset:
+	type: prototype function
+	params:
+		Object: new animation options
+	return:
+		NULL
+	change animation options
+
+AXE.prototype.setFrames:
+	type: prototype function
+	params:
+		Object or String: axe keyframes sequence containing timelines to add or change
+	return:
+		NULL
+
+AXE.prototype.apply:
+	type: prototype function
+	params:
+		String or HTMLElement: the query to an HTML element or an HTMLElement object
+	return:
+		Object: an instance of AXECONTROLS
+
+AXECONTROLS
+	type: Object
+	params:
+		String or HTMLElement: the query to an HTML element or an HTMLElement object
+	
+	axe module to control animations
+
+AXECONTROLS.prototype.start:
+	type: prototype function
+	params:
+		NULL
+	return:
+		NULL
+	starts the animation defined to an element
+
+AXECONTROLS.prototype.pause:
+	type: prototype function
+	params:
+		NULL
+	return:
+		NULL
+	pauses the animation defined to an element
+
+AXECONTROLS.prototype.play:
+	type: prototype function
+	params:
+		NULL
+	return:
+		NULL
+	plays the animation defined to an element
+
+AXECONTROLS.prototype.end:
+	type: prototype function
+	params:
+		NULL
+	return:
+		NULL
+	ends the animation defined to an element
+
+AXECONTROLS.prototype.restart:
+	type: prototype function
+	params:
+		NULL
+	return:
+		NULL
+	restarts the animation defined to an element
+
+AXECONTROLS.prototype.forEach:
+	type: own prototype function
+	params:
+		Function: the function that would executed
+	return:
+		NULL
+	applies a function to all elements of an array or associative array
+
+AXECONTROLS.prototype.event:
+	type: prototype function
+	params:
+		String (event-name): the event property to monitor, accepts one of these [ start, pause, play, restart end ]
+		Function (do-what): what to do when the event ocurrs
+	return:
+		NULL
+
+AXECONTROLS.prototype.r_event:
+	type: prototype function
+	params:
+		String (event-name): the event name to unbind function from
+		Function: initial function bound to the event
+
+AXECONTROLS.prototype.runEvents:
+	type: own prototype function
+	params:
+		String (event-name): the events to run
+	return:
+		NULL
+
+AXECONTROLS.prototype.moment:
+	type: prototype function
+	params:
+		String (moment-declaration): the moment code or declaration in the form of [ control, event, elements ], or repeated seperated by (;) [ control, event, elements;control, event, elements ]
+	return:
+		NULL
+
+AXECONTROLS.prototype.r_moment:
+	type: prototype function
+	params:
+		String (moment-declaration): declares the moments to remove in the form of [ control, event, elements ], or repeated seperated by (;) [ control, event, elements;control, event, elements ]
+	return:
+		NULL
+
+AXEEASY:
+	type: function
+	params:
+		String (animation-name): the name of the animation to use see [link to easy-name-ref]
+		Object (animation-options): options to change default behaviour of easy animations
+	return:
+		Object: an instance of AXE, for the animation requested
+
+HTML APIS
+	All HTML apis are attributes
+
+	axe-a: keyframes-sequence, // Required
+	axe-n: animation-name, // Required
+	axe-t: animation-duration, // Required
+	axe-d: animation-delay, 
+	axe-m: animation-fillmode, 
+	axe-f: animation-timing-function, 
+	axe-z: animation-direction, 
+	axe-i: animation-iteration-count,
+	axe-psuedo: psuedo-class	
+	axe-easy: axe-easy animation to use
+	axe-start: start the animation immediately after compilation presence evaluates as True, abscence False
+
+Events
+	axe-onstart: javascript code bound to the start event
+	axe-onpause: javascript code bound to the pause event
+	axe-onplay: javascript code bound to the play event
+	axe-onrestart: javascript code bound to the restart event
+	axe-onend: javascript code bound to the end event
+
+Momentux
+	axe-moment: moment declarations
+
+Function Arguments
+
+animation-options: $XE.$, $XE.easy, AXE, AXE.prototype.reset, AXEEASY
+{
+	'a': keyframes-sequence, // Required
+	'n': animation-name, // Required
+	't': animation-duration, // Required
+	'd': animation-delay, 
+	'm': animation-fillmode, 
+	'f': animation-timing-function, 
+	'z': animation-direction, 
+	'i': animation-iteration-count,
+	'psuedo': psuedo-class
+}
+
+keyframes-sequence: AXE.prototype.compile_keyframes, AXE.prototype.setFrames
+
+"AT%{TIME} `%{property-shortcode}: %{property-value}; t: %{transform-type}-%{transform-value};"
+
+AXE.prototype.setFrames also takes in object in the form
+{
+	'%{TIME}': {
+		'%{property-shortcode}': '%{property-value}',
+		'%{transform-type}': '%{transform-value}'
+	}
+}
+
+where:
+	%{TIME} - the time or percentage for the animation. for percentages, (%) should be appended e.g 2 or 3%
+	%{property-shortcode} - axe property name e.g bg, o
+	%{property-value} - the value for that property
+	%{transform-type} - the transform type e.g r, rX - rotate & rotateX
+	%{transform-value} - the transform value with or without unit ( also takes negative values )
+
+[link-to-creating-animations]

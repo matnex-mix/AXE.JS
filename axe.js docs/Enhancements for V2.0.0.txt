@@ -1,0 +1,9 @@
+Convert css keyframes to axe V
+Complete documentation V
+axe-style with pointers V
+proper variable definition and usage V
+Loading External animations V
+More axe-easy animations (axe-preload)
+Support more axe-moments functions [scrolledtoview]
+standard error reporting W
+plugin hooks [disabled] X

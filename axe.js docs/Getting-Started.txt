@@ -1,0 +1,13 @@
+------ Getting Started ------
+
+	AXE/AXE.js is a lightweight javascript for creating, controlling and managing web animations. AXE uses a USER_DEFINED system thus making it easily customizeable. AXE gives rise to making a site lively while writings few lines of text/syntax. Although we are not perfect, we ensure you an everlasting experience using AXE.
+
+	When to use AXE:
+
+		-- Need to do animations with less lines of js
+		-- Need to do animations with more of javascript
+		-- Looking to use animations from a collection of over 50 anims
+		-- Looking for a comprehensive animation library/framework
+
+
+------ Installation ------

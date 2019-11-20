@@ -1,0 +1,14 @@
+Basically, animations are controlled with javascript but can also be controlled with HTML see here. There are various control types you can specify: start, pause, play, restart, end; each one of these can be used in thesame way:
+```
+<script>
+
+	$axe = $XE.easy("bounce");
+
+	$axe.start();
+	setTimeout($axe.pause, 1000);
+	setTimeout($axe.play, 1000);
+	setTimeout($axe.restart, 1000);
+	setTimeout($axe.end, 1000);
+
+</script>
+```

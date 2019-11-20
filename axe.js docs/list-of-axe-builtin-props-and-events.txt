@@ -1,0 +1,4 @@
+Animations:
+bounce, flash, fade, roll, fall, heige
+
+CSS effects:

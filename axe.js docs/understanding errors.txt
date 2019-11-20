@@ -1,0 +1,15 @@
+Errors might be annoying sometimes but not knowing its meaning is devastating and takes a lot of time to figure out. In axe, errors are to some point self-explanatory but we decided to take a look at those errors to understand them better.
+
+Top-level Errors
+'AXE: Animation Keyframes not Set': Is thrown when no keyframes is set to create an animation
+'AXE: Animation Name not Set': Missing (n) property of the animation-options object when creating animations
+'AXE: Animation Duration not Set': When setting animations-options, include (t) to avoid this error
+'AXE: Keyframes Sequence Not Properly Formed': Thrown when axe keyframes syntax is wrong
+'AXE: You have an error in your definition syntax, kindly check and retry': Variable definition syntax in axe-keyframes causes this error when they are not formed properly
+'AXE Error: Unknown Error Ocurred': An error occurred which we donot know. you can always check the console trace for hint
+'AXE: Catched Exception; ': An exception was caught, you better check your event listener
+'AXE: Attempting to Remove function of undefined Event Type': when trying to remove event listeners with(out) specifying the (wrong) event type
+'AXE: Attempting to Remove function of undefined Event Type': Calling axe-easy function ($XE.easy) when you've not loaded it
+'AXE: Trying to Use undefined AXE-EASY Animation': using axe-easy animation that does not exist
+'AXE: registerCssProp; short_name not specified': calling function ($XE.registerCssProp) without specifying the short-name
+'AXE: registerCssProp; long_name not specified': calling function ($XE.registerCssProp) without specifying the long-name

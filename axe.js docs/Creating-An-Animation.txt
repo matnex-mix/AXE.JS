@@ -1,0 +1,110 @@
+------ Creating An Animation ------
+
+Let us now explain in detail how to create animations.
+
+	For JAVASCRIPT lovers:
+
+		<div id="axe-test">Testing AXE</div>
+		-- Create an Element That will host the animation --
+
+		<script>
+			AXE("#axe-test", {"t": "0.5", "n": "axe-test", "a": "AT0 `o:0 AT0.5 `o:1 "}, true);
+			--
+			  -- `AXE("#axe-test",` assigns the animation defined to this (group of) element(s) like JQUERY
+			  -- `{"t": "0.5", "n": "axe-test", "a": "AT0 `o:0 AT0.5 `o:1 "},` A javascript Object, the heart of the animation
+			    -- This Object Requires 3 compulsory properties:
+			    		t - animation-duration, 
+			    		n - animation-name, 
+			    		a - animation-keyframes-sequence;
+			    	5 optional properties:
+			    		d - animation-delay, 
+			    		m - animation-fillmode, 
+			    		f - animation-timing-function, 
+			    		z - animation-direction, 
+			    		i - animation-iteration-count;
+			    -- true): a boolean saying whether to automatically start the animation or wait for a command
+			--
+
+		</script>
+
+	For HTML lovers:
+
+		<div id="axe-test"
+			a-t="0.5" a-n="axe-test"
+			"a"="AT0 `o:0 AT0.5 `o:1 " init>
+			Testing AXE
+		</div>
+
+		-- Create an host element and bind it with its animation --
+
+	    -- This Mode Requires 3 compulsory element attributes:
+	    		axe-t - animation-duration, 
+	    		axe-n - animation-name, 
+	    		axe-a - animation-keyframes-sequence;
+	    	5 optional properties:
+	    		axe-d - animation-delay, 
+	    		axe-m - animation-fillmode, 
+	    		axe-f - animation-timing-function, 
+	    		axe-z - animation-direction, 
+	    		axe-i - animation-iteration-count;
+	    -- `init` an html attribute saying whether to automatically start the animation or wait for a command
+
+	animation-keyframes-sequence
+	
+		This is more like a css keyframe code but in a minified way.
+
+		In CSS: for blinking text
+
+		@keyframes text-blinking {
+
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+
+		}
+
+		In AXE: 
+
+		AT0 `o: 0; AT1 `o:1; END
+
+--- Creating An Animation 2 ---
+
+Explaining (animation-keyframes-sequence)
+
+AXE was built to also reduce the pain of writing animations keyframes, in other words, all AXE keyframes are compiled into the original CSS keyframes.
+
+It starts by defining the timings instead of percentages: (AT0) `o: 0; (AT1) `o:1; END
+
+The words surrounded by brackets are the timings. A timing is created by appending the time the CSS should happen after the capital AT thus, valid timings are illustrated below:
+
+AT0: (start the CSS at 0s)
+AT1.56 (start the CSS at 1.56s)
+
+After the animation timings comes the CSS styles to add for that timing: AT0 (`o: 0;) AT1 (`o:1;) END
+
+The bracketed words are the CSS styles to apply at the corresponding timing thus, AT0 `o: 0; compiles to 0% { opacity: 0; } in the real CSS Keyframes.
+
+The CSS property can be formed like:
+
+`property-shortcode: property-value;
+
+or if its a transform-property
+
+t: transform-type(transform-value)
+
+The list of accepted property shortcodes can be viewed here
+
+For example to style the margin and scale at 2s would be:
+
+AT2.0 `m: 5; t: s1.5;
+
+or
+
+AT2 `m: 5px; t: s1.5; END
+
+Both yield same results.
+
+------ Animation Controls ------

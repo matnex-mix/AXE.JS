@@ -1,0 +1,22 @@
+------ How It Works ------
+
+	AXE has two modes: HTML, JS, either of these two modes can be used for any AXE function you want to perform.
+
+	From Installation:
+
+		<div id="axe-test">Testing AXE</div>
+		<script>
+			AXE("#axe-test", {"t": "0.5", "n": "axe-test", "a": "AT0 `o:0 AT0.5 `o:1 "}, true);
+		</script>
+
+	The above is JS mode: WHY? because you wrote javascript.
+
+		<div id="axe-test"
+			a-t="0.5" a-n="axe-test"
+			"a"="AT0 `o:0 AT0.5 `o:1 " init>
+			Testing AXE
+		</div>
+
+	The above is HTML mode: WHY? because no javascript is written at all. Believe me, both code performs exactly same work
+
+------ Creating An Animation ------

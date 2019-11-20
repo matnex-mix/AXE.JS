@@ -1,0 +1,37 @@
+when you open the axe-easy.js you will see something like
+
+/*
+	
+	See all axe-easy default animations, copy this to a javascript console
+
+**
+	console.log( JSON.parse( atob( 'eyJib3VuY2UiOnsiYSI6IkFUMCUgdDogdFktLTEwMCU7IG86IDA7IEFUNSUgdDogdFktLTEwMCUgbzogMDsgQVQxNSUgdDogdFktMDsgcEI6IDU\
+	7IEFUMzAlIHQ6IHRZLS01MCU7IEFUNDAlIHQ6IHRZLTA7IHBCOiA2OyBBVDUwJSB0OiB0WS0tMzAlOyBBVDcwJSB0OiB0WS0wOyBwQjogN3B4OyB\
+	BVDgwJSB0OiB0WS0tMTUlOyBBVDkwJSB0OiB0WS0wOyBwYjogNzsgQVQ5NSUgdDogdFktLTclOyBBVDk3JSB0OiB0WS0wOyBwQjogOTsgQVQ5OSU\
+	gdDogdFktLTMlOyBBVDEwMCUgdDogdFktMDsgcEI6IDk7ICIsIm4iOiJib3VuY2UiLCJ0IjozLCJmIjoiZWFzZS1vdXQifX0=' ) ) )
+**
+
+*/
+
+this is not meant to be editted, it is the default animations that come with axe-easy. It is a way to revert axe-easy back to the default animations when you seem lost.
+
+If you are familiar with javascript, you will see a variable named $xeasy was declared. This declaration is an object and it contains all the axe-easy animations.
+
+Adding your animation
+you just extend the $xeasy object one element like thus
+
+	$xeasy[extension-name] = extension-options
+
+	extension-name: name to reference the animation
+	extension-options: same as animation options with an extra optional property (ini)
+	ini (property of extension-options): a function that gets executed after the animation has been created and takes in an argument referencing the created animation
+
+		$xeasy['mybounce'] = {
+			a: "AT0% t: tY--100%; o: 0; AT5% t: tY--100% o: 0; AT15% t: tY-0; pB: 5; AT30% t: tY--50%; AT40% t: tY-0; pB: 6; AT50% t: tY--30%; AT70% t: tY-0; pB: 7px; AT80% t: tY--15%; AT90% t: tY-0; pb: 7; AT95% t: tY--7%; AT97% t: tY-0; pB: 9; AT99% t: tY--3%; AT100% t: tY-0; pB: 9;",
+			n: "bounce",
+			t: 3,
+			f: "ease-out",
+			ini: function( anim ){
+				console.log( anim.name )
+			}
+		}

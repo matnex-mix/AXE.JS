@@ -1,0 +1,13 @@
+
+1 -- Getting Started
+2 -- Installation
+3 -- How it Works (brief)
+4 -- Creating Animations
+5 -- Animations Controls
+6 -- Animation Events
+7 -- Built-in APIS
+8 -- AXE Best Practices
+9 -- Basic/Important Plugins
+10 -- Creating your Own Plugins
+11 -- How tos
+12 -- AXE Reference
