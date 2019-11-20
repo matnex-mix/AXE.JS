@@ -1,0 +1,235 @@
+<script type="text/javascript" src="axe.js"></script>
+
+<table style="width: 100%">
+	<tr>
+		<td>
+			<h4>From [CSS]</h4>
+			<textarea id="convert" style="width: 100%" rows="20" onkeyup="document.getElementById('sc-text').innerHTML = this.value.length"></textarea>
+			<small>
+				Size: <span id="sc-text">0</span>B
+			</small>
+		</td>
+		<td>
+			<h4>To [AXE]</h4>
+			<textarea id="conversion" style="width: 100%" rows="20" onkeyup="document.getElementById('scs-text').innerHTML = this.value.length"></textarea>
+			<small>
+				Size: <span id="scs-text">0</span>B
+			</small>
+		</td>
+		<td>
+			<h4>Back To [CSS]</h4>
+			<textarea id="conversion-backto" style="width: 100%" rows="20" onkeyup="document.getElementById('backto-text').innerHTML = this.value.length" readonly></textarea>
+			<small>
+				Size: <span id="backto-text">0</span>B
+			</small>
+		</td>
+	</tr>
+</table>
+<br/>
+<button onclick="doAxeConvert();">CONVERT</button>
+<button onclick="doAxeRevert();">REVERT</button>
+<button onclick="doTestConvert();">TEST CONVERT</button>
+<button onclick="doTestRevert();">TEST REVERT</button>
+
+<br/>
+<div id="tester" style="border: 2px solid indigo; padding: 1rem; max-width: 70%; margin: 1rem auto; animation-name: convert; animation-duration: 1s;">MATNEX</div>
+
+<script>
+	from_el = document.getElementById('convert');
+	to_el = document.getElementById('conversion');
+	backto_el = document.getElementById('conversion-backto');
+
+	function doTestConvert() {
+		st = document.createElement( "style" );
+		st.innerHTML = from_el.value+'\n'+backto_el.value;
+		document.body.appendChild(st);
+		document.getElementById('tester').style.animationName = "convert";
+	}
+
+	function doTestRevert() {
+		st = document.createElement( "style" );
+		st.innerHTML = from_el.value+'\n'+backto_el.value;
+		document.body.appendChild(st);
+		document.getElementById('tester').style.animationName = "axeframes-convert";
+	}
+
+	function doAxeRevert() {
+		bck = $XE.$( {n: 'convert', t: 3, a: to_el.value} );
+		backto_el.value = bck.build_out;
+		document.getElementById('backto-text').innerHTML = backto_el.value.length;
+	}
+
+	function doAxeConvert() {
+		from = from_el.value;
+
+		obj_rep = {}
+		ip = from.indexOf('{');
+		rip = from.lastIndexOf('}');
+
+		from = from.substring( ip+1, rip );
+		from = from.replace( /\n/gm, '' ).replace( /\t/gm, '' );
+
+		name=''
+		start=-1
+
+		for( x=0; x<from.length; x++ ) {
+			if(from[x] == '{') {
+				si = 0;
+				for( xi=x-1; xi>=0; xi-- ) {
+					if(from[xi] == '}') {
+						si = xi+1;
+						break;
+					}
+				}
+				name = from.substring( si, x ).trim();
+				if( name=='from' ) {
+					name = '0%';
+				} else if( name=='to' ) {
+					name = '100%';
+				}
+				start=x+1;
+				obj_rep[name] = {};
+			} else if( from[x] == '}' && start!=-1 ) {
+				focus = from.substring(start, x-1).split(';');
+				for( xii=0; xii<focus.length; xii++ ) {
+					if( !focus[xii].trim() ) {
+						continue;
+					}
+					p_name = focus[xii].split(':');
+					value = p_name[1].trim();
+					p_name = p_name[0].trim().replace( /-webkit-|-ms-|-os-/, '' );
+
+					if(p_name == 'transform') {
+						value = value.split(') ');
+						for( i=0; i<value.length; i++ ) {
+							value[i] = value[i].trim().replace(')', '').split('(');
+							value[i] = $XES[value[i][0].trim()]+'-'+value[i][1].replace( /\s/gm, '' );
+						}
+					}
+					obj_rep[name][$XES[p_name]] = value;
+				}
+				name = '';
+				start = -1;
+			}
+		}
+
+		from = ''
+		for(x in obj_rep) {
+			from += 'AT'+x.replace( "to", "100%" ).replace( "from", "0%" ).replace( /,\s*/gm, "," )+' ';
+			for( y in obj_rep[x] ) {
+				if( typeof obj_rep[x][y] == 'object' ) obj_rep[x][y] = obj_rep[x][y].join(' ');
+				from += y+': '+obj_rep[x][y]+'; ';
+			}
+		}
+
+		to_el.value = from;
+		document.getElementById('scs-text').innerHTML = to_el.value.length;
+		delete( obj_rep );
+
+	}
+</script>
+<script type="text/javascript">
+$XES = {
+	"animation": "anm",
+	"animation-duration": "adr",
+	"animation-iteration-count": "ait",
+	"animation-delay": "adl",
+	"animation-timing-function": "atf",
+	"animation-fill-mode": "afm",
+	"animation-direction": "adr",
+	"transform": "t",
+	"transform-origin": "to",
+	"rotate": "r",
+	"rotate3d": "rd",
+	"rotateX": "rX",
+	"rotateY": "rY",
+	"scale": "s",
+	"scale3d": "sd",
+	"scaleX": "sX",
+	"scaleY": "sY",
+	"skew": "sk",
+	"skew3d": "skd", 
+	"skewX": "skX",
+	"skewY": "skY",
+	"translate": "t",
+	"translate3d": "td",
+	"translateX": "tX",
+	"translateY": "tY",
+	"background": "bg",
+	"background-attachment": "bga",
+	"background-color": "bgc",
+	"background-image": "bgi",
+	"background-position": "bgp",
+	"background-repeat": "bgr",
+	"border": "b",
+	"border-bottom": "bb",
+	"border-bottom-color": "bbc",
+	"border-bottom-style": "bbs",
+	"border-bottom-width": "bbw",
+	"border-color": "bc",
+	"border-left": "bl",
+	"border-left-color": "blc",
+	"border-left-style": "bls",
+	"border-left-width": "blw",
+	"border-right": "br",
+	"border-right-color": "brc",
+	"border-right-style": "brs",
+	"border-right-width": "brw",
+	"border-style": "bs",
+	"border-top": "bt",
+	"border-top-color": "btc",
+	"border-top-style": "bts",
+	"border-top-width": "btw",
+	"border-width": "bw",
+	"clear": "clr",
+	"clip": "clp",
+	"color": "col",
+	"cursor": "cur",
+	"display": "dis",
+	"filter": "fil",
+	"float": "fl",
+	"font": "f",
+	"font-family": "ff",
+	"font-size": "fs",
+	"font-variant": "fv",
+	"font-weight": "fw",
+	"height": "h",
+	"left": "lef",
+	"letter-spacing": "lts",
+	"line-height": "lh",
+	"list-style": "ls",
+	"list-style-image": "lsi",
+	"list-style-position": "lsp",
+	"list-style-type": "lst",
+	"margin": "m",
+	"margin-bottom": "mb",
+	"margin-left": "ml",
+	"margin-right": "mr",
+	"margin-top": "mt",
+	"opacity": "o",
+	"overflow": "ov",
+	"overflow-x": "ox",
+	"overflow-y": "oy",
+	"padding": "p",
+	"padding-bottom": "pb",
+	"padding-left": "pl",
+	"padding-right": "pr",
+	"padding-top": "pt",
+	"page-break-after": "pba",
+	"page-break-before": "pbb",
+	"perspective": "per",
+	"position": "pos",
+	"stroke-dasharray": "sda",
+	"stroke-dashoffset": "sdo",
+	"stroke-width": "sw",
+	"text-align": "ta",
+	"text-decoration": "td",
+	"text-indent": "ti",
+	"text-transform": "tt",
+	"top": "top",
+	"vertical-align": "va",
+	"visibility": "vis",
+	"width": "w",
+	"z-index": "z"
+}
+</script>

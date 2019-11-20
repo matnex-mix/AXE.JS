@@ -1,0 +1,8 @@
+# Axe Testing 3
+
+heige {
+	t: 1,
+	i: infinite,
+	f: ease-in,
+	a: 'AT0% t: r--76; AT30% t: r-90; AT60% t: r-44; AT90% t: r-112;'
+}

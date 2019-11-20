@@ -1,0 +1,58 @@
+<script src="axe.js"></script>
+<script src="axe-html.js"></script>
+<script src="axe-easy.js"></script>
+
+<style axe-style="axe-pointers.axes"></style>
+<style axe-style="axe-pointers1.axes" ></style>
+<style axe-style>
+	dummyAnim {
+		t: 2,
+		i: infinite,
+		a: 'AT25% brc: red; AT50% t: r-720; blc: green; AT75% btc: indigo; AT100% bbc: purple;',
+		f: ease-out
+	}
+	straight {
+		t: 5,
+		i: infinite,
+		a: 'DEF type[`Math.random()] b[10] c[10,12] || AT0% t: r-30; AT10% t: r-330 t-110%,-10%; AT15% t: r-360 t-120%,0; AT15.001% t: r-0 t-120%,-5%; to: 120% -5%; AT40% t: r-360 t-150%,0; AT45% o: %c; AT50% o: %c; AT60% o: %type; ',
+		f: ease-in
+	}
+</style>
+
+<div class="dummy" axe-pointer="dummyAnim" axe-start>
+	0%
+</div>
+
+<div class="dummy" axe-pointer="dummy" axe-start>
+	SHAKE
+</div>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div class="dummy" axe-pointer="heige" axe-start style="border-radius: 0; transform-origin: 0 0;">
+	HEIGE
+</div>
+<div class="dummy" axe-pointer="straight" style="border-radius: 0; tansform-origin: 0 0;" axe-start>
+	FLIP
+</div>
+
+<style type="text/css">
+	.dummy {
+		border: 10px solid gold;
+		background: royalblue;
+		padding: 30px;
+		border-radius: 50%;
+		display: inline-block;
+		font-size: xx-large;
+		color: white;
+		box-shadow: 2px 2px 10px #d7d7d75f;
+	}
+	body {
+		background: black;
+	}
+</style>
+
+<script type="text/javascript">
+	function call(){
+		return ['a', 'b'];
+	}
+</script>
